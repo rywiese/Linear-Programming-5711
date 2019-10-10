@@ -12,22 +12,18 @@ function [solution, value] = Simplex_Helper(A, b, c, B, N)
     c_hat = c - transpose(A(:,B==1)^(-1) * A) * c(B==1);
 
     % Stopping condition
-    if(c_hat >= 0)
+    if c_hat >= -0.000001
         solution = x;
         value = transpose(c) * x;
         return
     end
 
     % Choose j
-    %[~,I] = min(c_hat(N==1));
-    %j = I(1);
-    smallest = inf;
-    j = -1;
     for k = 1:n
         if N(k) == 1
-            if c_hat(k) < smallest
-                smallest = c_hat(k);
+            if c_hat(k) < 0
                 j = k;
+                break;
             end
         end
     end
@@ -46,12 +42,11 @@ function [solution, value] = Simplex_Helper(A, b, c, B, N)
     end
 
     % Choose i
-    smallest = inf;
-    i = -1;
+    theta = inf;
     for k = 1:n
         if B(k) == 1 & d(k) < 0
-            if -1 * x(k) / d(k) < smallest
-                smallest = -1 * x(k) / d(k);
+            if -1 * x(k) / d(k) < theta
+                theta = -1 * x(k) / d(k);
                 i = k;
             end
         end
