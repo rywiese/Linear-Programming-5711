@@ -31,8 +31,17 @@ function [solution, value] = Simplex(A, b, c)
             
             % Test if BFS
             if x >= 0
+
                 % Call the actual algorithm with the starting basis
-                [solution, value] = Simplex_Helper(A, b, c, B, N);
+                [B_star, N_star] = Simplex_Helper(A, b, c, B, N);
+                
+                % Compute solution
+                solution = zeros(n, 1);
+                solution(B_star==1) = A(:,B_star==1)^(-1) * b;
+
+                % Compute value
+                value = transpose(c) * solution;
+
                 return
             end
         end

@@ -1,4 +1,4 @@
-function [solution, value] = Simplex_Helper(A, b, c, B, N)
+function [B, N] = Simplex_Helper(A, b, c, B, N)
     
     % Get m and n
     [m, n] = size(A);
@@ -13,8 +13,6 @@ function [solution, value] = Simplex_Helper(A, b, c, B, N)
 
     % Stopping condition
     if c_hat >= -0.000001
-        solution = x;
-        value = transpose(c) * x;
         return
     end
 
@@ -61,5 +59,5 @@ function [solution, value] = Simplex_Helper(A, b, c, B, N)
     N_hat(j) = 0;
     N_hat(i) = 1;
 
-    [solution, value] = Simplex_Helper(A, b, c, B_hat, N_hat);
+    [B, N] = Simplex_Helper(A, b, c, B_hat, N_hat);
 end
