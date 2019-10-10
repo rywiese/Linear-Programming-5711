@@ -15,6 +15,8 @@ function [solution, value] = Simplex(A, b, c)
     end
     
     % Phase 1
+
+    % Initialize parameters for subproblem
     A_hat = zeros(m, n+m);
     A_hat(:, 1:n) = A;
     A_hat(:, n+1:n+m) = eye(m);
@@ -22,8 +24,8 @@ function [solution, value] = Simplex(A, b, c)
     b_hat = b;
     for i = 1:m
         if b_hat(i) < 0
-            b(i) = - 1 * b(i);
-            A(i,:) = - 1 * A(i,:);
+            b_hat(i) = - 1 * b_hat(i);
+            A_hat(i,:) = - 1 * A_hat(i,:);
         end
     end
 
@@ -34,10 +36,24 @@ function [solution, value] = Simplex(A, b, c)
     B_hat(n+1:n+m) = ones(m, 1);
     N_hat = ones(n+m, 1) - B_hat;
 
-    [B, N] = Simplex_Helper(A_hat, b_hat, c_hat, B_hat, N_hat);
+    % Solve subproblem
+    [B_sub, N_sub] = Simplex_Helper(A_hat, b_hat, c_hat, B_hat, N_hat);
+    
+    % Obtain solution to subproblem
     x_hat = zeros(n+m, 1);
-    x_hat(B==1) = A_hat(:,B==1)^(-1) * b_hat;
+    x_hat(B_sub==1) = A_hat(:,B_sub==1)^(-1) * b_hat;
+    
+    % Obtain optimal value for subproblem
     y = transpose(c_hat) * x_hat;
+    if y ~= 0
+        %error("Infeasible")
+        solution = "None - problem infeasible";
+        value = inf;
+        return
+    end
+
+    B = B_sub(1:n);
+    N = ones(n, 1) - B;
 
     % Phase 2
     [B_star, N_star] = Simplex_Helper(A, b, c, B, N);

@@ -11,7 +11,7 @@ cvx_begin
         A * x == b
         x >= 0
 cvx_end
-while ~(0 <= sum(x) || sum(x) <= 0)
+while false && ~(0 <= sum(x) || sum(x) <= 0)
     A = rand([m, n]);
     b = rand([m, 1]);
     c = rand([n, 1]);
@@ -26,6 +26,7 @@ end
 x
 
 [solution, value] = Simplex(A, b, c);
+
 "My simplex implementation:"
 solution
 value
