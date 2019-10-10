@@ -1,3 +1,9 @@
+% Takes as input an LP = (A, b, c)
+%
+% Returns the optimal solution and optimal value
+%
+% Returns an error string "None - problem infeasible"
+% and an optimal value of Inf if the problem is infeasible
 function [solution, value] = Simplex(A, b, c)
     
     % Get m and n

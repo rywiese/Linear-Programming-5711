@@ -1,4 +1,11 @@
-function [B, N] = Simplex_Helper(A, b, c, B, N)
+% Takes as input an LP = (A, b, c) and the partition (B, N)
+%
+% Returns a new partition {B_star, N_star} such that B_star
+% is the basis for the optimal BFS
+%
+% Only to be used as a helper function for the full 
+% simplex algorithm
+function [B_star, N_star] = Simplex_Helper(A, b, c, B, N)
     
     % Get m and n
     [m, n] = size(A);
@@ -13,10 +20,12 @@ function [B, N] = Simplex_Helper(A, b, c, B, N)
 
     % Stopping condition
     if c_hat >= -0.000001
+        B_star = B;
+        N_star = N;
         return
     end
 
-    % Choose j
+    % Choose j using smallest index rule
     for k = 1:n
         if N(k) == 1
             if c_hat(k) < 0
@@ -39,7 +48,7 @@ function [B, N] = Simplex_Helper(A, b, c, B, N)
         error("Problem is unbounded")
     end
 
-    % Choose i
+    % Choose i using smallest index rule
     theta = inf;
     for k = 1:n
         if B(k) == 1 & d(k) < 0
@@ -59,5 +68,5 @@ function [B, N] = Simplex_Helper(A, b, c, B, N)
     N_hat(j) = 0;
     N_hat(i) = 1;
 
-    [B, N] = Simplex_Helper(A, b, c, B_hat, N_hat);
+    [B_star, N_star] = Simplex_Helper(A, b, c, B_hat, N_hat);
 end
