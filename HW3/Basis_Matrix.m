@@ -1,17 +1,20 @@
+% Returns an (n choose m) by n matrix
+% where each row has m 1's and n-m 0's
+% and no two rows are the same
+% 
+% Each row corresponds to a choice of
+% m basis vectors (the 1's) and n-m
+% non-basis vectors (the 0's)
 function [M] = Basis_Matrix(m, n)
     
     % Base case
     if n < 1
         M = [];
         return
-    end
-    if m < 0 | m > n
+    elseif m < 0 | m > n
         M = [];
         return
-    end
-
-    % Base case
-    if m == 0
+    elseif m == 0
         M = zeros([1, n]);
         return
     elseif n == 1

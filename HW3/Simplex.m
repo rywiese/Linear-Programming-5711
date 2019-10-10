@@ -31,6 +31,7 @@ function [solution, value] = Simplex(A, b, c)
             
             % Test if BFS
             if x >= 0
+                % Call the actual algorithm with the starting basis
                 [solution, value] = Simplex_Helper(A, b, c, B, N);
                 return
             end
