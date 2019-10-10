@@ -14,36 +14,39 @@ function [solution, value] = Simplex(A, b, c)
         error("c must have length n")
     end
     
-    % Look through valid bases to find a BFS
-    Bases = Basis_Matrix(m, n);
-    [num_bases, ~] = size(Bases);
-    for i = 1:num_bases
-
-        B = transpose(Bases(i,:));
-        N = ones([n, 1]) - B;
-
-        % Test if B is a valid basis
-        if det(A(:,B==1)) ~= 0
-            
-            % Compute x
-            x = zeros(n, 1);
-            x(B==1) = A(:,B==1)^(-1) * b;
-            
-            % Test if BFS
-            if x >= 0
-
-                % Call the actual algorithm with the starting basis
-                [B_star, N_star] = Simplex_Helper(A, b, c, B, N);
-                
-                % Compute solution
-                solution = zeros(n, 1);
-                solution(B_star==1) = A(:,B_star==1)^(-1) * b;
-
-                % Compute value
-                value = transpose(c) * solution;
-
-                return
-            end
+    % Phase 1
+    A_hat = zeros(m, n+m);
+    A_hat(:, 1:n) = A;
+    A_hat(:, n+1:n+m) = eye(m);
+    
+    b_hat = b;
+    for i = 1:m
+        if b_hat(i) < 0
+            b(i) = - 1 * b(i);
+            A(i,:) = - 1 * A(i,:);
         end
     end
+
+    c_hat = zeros(n+m, 1);
+    c_hat(n+1:n+m) = ones(m, 1);
+
+    B_hat = zeros(n+m, 1);
+    B_hat(n+1:n+m) = ones(m, 1);
+    N_hat = ones(n+m, 1) - B_hat;
+
+    [B, N] = Simplex_Helper(A_hat, b_hat, c_hat, B_hat, N_hat);
+    x_hat = zeros(n+m, 1);
+    x_hat(B==1) = A_hat(:,B==1)^(-1) * b_hat;
+    y = transpose(c_hat) * x_hat;
+
+    % Phase 2
+    [B_star, N_star] = Simplex_Helper(A, b, c, B, N);
+                
+    % Compute solution
+    solution = zeros(n, 1);
+    solution(B_star==1) = A(:,B_star==1)^(-1) * b;
+
+    % Compute value
+    value = transpose(c) * solution;
+
 end
