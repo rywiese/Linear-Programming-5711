@@ -43,30 +43,29 @@ function [solution, value] = Simplex(A, b, c)
     N_hat = ones(n+m, 1) - B_hat;
 
     % Solve subproblem
-    [B_sub, N_sub] = Simplex_Helper(A_hat, b_hat, c_hat, B_hat, N_hat);
+    [B_star] = Simplex_Helper(A_hat, b_hat, c_hat, B_hat);
+    N_star = ones(n+m, 1) - B_star;
     
     % Obtain solution to subproblem
     x_hat = zeros(n+m, 1);
-    x_hat(B_sub==1) = A_hat(:,B_sub==1)^(-1) * b_hat;
+    x_hat(B_star==1) = A_hat(:,B_star==1)^(-1) * b_hat;
     
-    % Obtain optimal value for subproblem
-    y = transpose(c_hat) * x_hat;
-    if y ~= 0
-        %error("Infeasible")
+    % Test for feasibility
+    if transpose(c_hat) * x_hat ~= 0
         solution = "None - problem infeasible";
         value = inf;
         return
     end
 
-    B = B_sub(1:n);
-    N = ones(n, 1) - B;
+    B_star = B_star(1:n);
+    N_star = ones(n, 1) - B_star;
 
     % Phase 2
-    [B_star, N_star] = Simplex_Helper(A, b, c, B, N);
+    [B] = Simplex_Helper(A, b, c, B_star);
                 
     % Compute solution
     solution = zeros(n, 1);
-    solution(B_star==1) = A(:,B_star==1)^(-1) * b;
+    solution(B==1) = A(:,B==1)^(-1) * b;
 
     % Compute value
     value = transpose(c) * solution;

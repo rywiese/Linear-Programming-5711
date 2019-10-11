@@ -5,7 +5,7 @@
 %
 % Only to be used as a helper function for the full 
 % simplex algorithm
-function [B_star, N_star] = Simplex_Helper(A, b, c, B, N)
+function [B_star] = Simplex_Helper(A, b, c, B)
     
     % Get m and n
     [m, n] = size(A);
@@ -14,6 +14,9 @@ function [B_star, N_star] = Simplex_Helper(A, b, c, B, N)
     x = zeros(n, 1);
     x(B==1) = A(:,B==1)^(-1) * b;
 
+    % Compute N
+    N = ones(n, 1) - B;
+
     % Compute c_hat
     % c_hat^T = transpose(c) - transpose(c(B==1)) * A(:,B==1)^(-1) * A;
     c_hat = c - transpose(A(:,B==1)^(-1) * A) * c(B==1);
@@ -21,7 +24,6 @@ function [B_star, N_star] = Simplex_Helper(A, b, c, B, N)
     % Stopping condition
     if c_hat >= -0.000001
         B_star = B;
-        N_star = N;
         return
     end
 
@@ -64,9 +66,5 @@ function [B_star, N_star] = Simplex_Helper(A, b, c, B, N)
     B_hat(i) = 0;
     B_hat(j) = 1;
 
-    N_hat = N;
-    N_hat(j) = 0;
-    N_hat(i) = 1;
-
-    [B_star, N_star] = Simplex_Helper(A, b, c, B_hat, N_hat);
+    [B_star] = Simplex_Helper(A, b, c, B_hat);
 end
