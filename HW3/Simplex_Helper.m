@@ -1,10 +1,8 @@
-% Takes as input an LP = (A, b, c) and the partition (B, N)
+% Takes as input an LP = (A, b, c) and the basis B
 %
-% Returns a new partition {B_star, N_star} such that B_star
-% is the basis for the optimal BFS
+% Returns a new basis B* such that B* is the basis for the optimal BFS
 %
-% Only to be used as a helper function for the full 
-% simplex algorithm
+% Only to be used as a helper function for the full simplex algorithm
 function [B_star] = Simplex_Helper(A, b, c, B)
     
     % Get m and n
