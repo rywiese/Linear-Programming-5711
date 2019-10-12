@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,graphicx}
+
+\title{HW3}
+\author{Ry Wiese\\wiese176@umn.edu}
+\date{October 11, 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+$A = 
+\left(
+    \begin{array}{cccccc}
+        2 & 1 & 1 & 1 & 0 & 0\\
+        3 & 1 & 2 & 0 & 1 & 0\\
+        1 & 2 & 4 & 0 & 0 & 1\\
+    \end{array}
+\right),~
+b = 
+\left(
+    \begin{array}{c}
+        240\\
+        150\\
+        180\\
+    \end{array}
+\right),~ 
+c = 
+\left(
+    \begin{array}{c}
+        500\\
+        250\\
+        600\\
+        0\\
+        0\\
+        0\\
+    \end{array}
+\right)$
+
+$\mathbf{Step~1}$:\\
+Basis: $B = \{4, 5, 6\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        240\\
+        150\\
+        180\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = 0$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        -500\\
+        -250\\
+        -600\\
+    \end{array}
+\right)$\\
+Variable to enter: $x_1$, since $\mathbf{\bar{c}}_{N_1} = -500$ is the first negative value in $\mathbf{\bar{c}}_N$\\
+Variable to exit: $x_5$, since $\mathbf{d}_B = \left(
+    \begin{array}{c}
+        -2\\
+        -3\\
+        -1\\
+    \end{array}
+\right),~
+\mathbf{\theta}_B = \left(
+    \begin{array}{c}
+        120\\
+        50\\
+        180\\
+    \end{array}
+\right)$ with $\theta_{B_5} = 50$\\
+We change to basis $\{1,4,6\}$ since $\mathbf{\bar{c}}$ is not semipositive.\\
+\\
+\\
+$\mathbf{Step~2}$:\\
+Basis: $B = \{1, 4, 6\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        50\\
+        140\\
+        130\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = -25,000$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        -83\\
+        -267\\
+        -167\\
+    \end{array}
+\right)$\\
+Variable to enter: $x_2$, since $\mathbf{\bar{c}}_{N_2} = -83$ is the first negative value in $\mathbf{\bar{c}}_N$\\
+Variable to exit: $x_6$, since $\mathbf{d}_B = \left(
+    \begin{array}{c}
+        -.3\\
+        -.3\\
+        -1.7\\
+    \end{array}
+\right),~
+\mathbf{\theta}_B = \left(
+    \begin{array}{c}
+        150\\
+        420\\
+        78\\
+    \end{array}
+\right)$ with $\theta_{B_6} = 78$\\
+We change to basis $\{1,2,4\}$ since $\mathbf{\bar{c}}$ is not semipositive.\\
+\\
+\\
+$\mathbf{Step~3}$:\\
+Basis: $B = \{1, 2, 4\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        24\\
+        78\\
+        114\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = -31,500$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        -100\\
+        -150\\
+        -50\\
+    \end{array}
+\right)$\\
+Variable to enter: $x_3$, since $\mathbf{\bar{c}}_{N_3} = -100$ is the first negative value in $\mathbf{\bar{c}}_N$\\
+Variable to exit: $x_2$, since $\mathbf{d}_B = \left(
+    \begin{array}{c}
+        0\\
+        -2\\
+        1\\
+    \end{array}
+\right),~
+\mathbf{\theta}_B = \left(
+    \begin{array}{c}
+        -\\
+        39\\
+        -\\
+    \end{array}
+\right)$ with $\theta_{B_2} = 39$\\
+We change to basis $\{1,3,4\}$ since $\mathbf{\bar{c}}$ is not semipositive.\\
+\\
+\\
+$\mathbf{Step~4}$:\\
+Basis: $B = \{1, 3, 4\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        24\\
+        39\\
+        153\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = -35,400$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        50\\
+        140\\
+        80\\
+    \end{array}
+\right)$\\
+The current basis, $B = \{1, 3, 4\}$ is optimal because $\mathbf{\bar{c}} \ge \mathbf{0}$. \\
+\\
+Thus the optimal solution is $x_1 = 24, x_2 = 0,$ and $x_3 = 39$ for an optimal value of 35,400 (since the original problem was maximization).
+
+\section{Problem 2}
+
+$\mathbf{Step~1}$:\\
+Basis: $B = \{5, 6\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        0\\
+        0\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = 0$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        -2\\
+        -3\\
+        1\\
+        12\\
+    \end{array}
+\right)$\\
+Variable to enter: $x_1$, since $\mathbf{\bar{c}}_{N_1} = -2$ is the first negative value in $\mathbf{\bar{c}}_N$\\
+Variable to exit: $x_6$, since $\mathbf{d}_B = \left(
+    \begin{array}{c}
+        2\\
+        -.3\\
+    \end{array}
+\right),~
+\mathbf{\theta}_B = \left(
+    \begin{array}{c}
+        -\\
+        0\\
+    \end{array}
+\right)$ with $\theta_{B_6} = 0$\\
+We change to basis $\{1,5\}$ since $\mathbf{\bar{c}}$ is not semipositive.\\
+\\
+\\
+$\mathbf{Step~2}$:\\
+Basis: $B = \{1,5\}$\\
+BFS: $\mathbf{x}_B = A_B^{-1}\mathbf{b} = 
+\left(
+    \begin{array}{c}
+        0\\
+        0\\
+    \end{array}
+\right)$\\
+Objective value: $\mathbf{c}^T \mathbf{x} = 0$\\
+Reduced costs: $\mathbf{\bar{c}}_N = \mathbf{c}_N - (A_B^{-1} A_N)^T \mathbf{c}_B = 
+\left(
+    \begin{array}{c}
+        3\\
+        -1\\
+        0\\
+        6\\
+    \end{array}
+\right)$\\
+Variable to enter: $x_3$, since $\mathbf{\bar{c}}_{N_3} = -1$ is the first negative value in $\mathbf{\bar{c}}_N$\\
+$\mathbf{d}_B = \left(
+    \begin{array}{c}
+        1\\
+        1\\
+    \end{array}
+\right) \ge \mathbf{0}$, therefore the problem is unbounded.
+
+\section{Problem 3}
+
+Let $B \subseteq \{1,..,n+m\}$ be the basis returned by $\Phi$. Suppose $B$ can be partitioned into $\{P,Q\}$ where $P \subseteq \{1,..,n\}$ (indices of non-artificial variables) and $Q \subseteq \{n+1,..,n+m\}$ (indices of artificial variables). Let $A' = (A | I_m)$ be the matrix used in $\Phi$. Since the optimal value $\sum_{j=1}^m x_{n+j} = 0$ and $\mathbf{x} = 0$, $\left( \begin{array}{c} x_n+1\\...\\x_n+m \end{array} \right) = \mathbf{0}$. Then, if $\mathbf{x}$ is a BFS of $\Phi$, $A' \mathbf{x} = A \left( \begin{array}{c} x_1\\...\\x_n \end{array} \right) + I_m \left( \begin{array}{c} x_n+1\\...\\x_n+m \end{array} \right) = A \left( \begin{array}{c} x_1\\...\\x_n \end{array} \right)$. Thus the basis vectors defined in $Q$ do not contribute anything to the BFS, as they have scalar coefficients of 0. This means we can replace the indices in $Q$ with $\textit{any}$ indices in $B$ that do not create a linear dependence. 
+
+
+\section{Problem 4}
+
+My algorithm is contained in the Simplex function, which uses Simplex$\_$Helper as a helper function.You should be able to use Simplex without needing to touch Simplex$\_$Helper at all. I have also created a function Test(m, n) which randomly generates $A$, $\mathbf{b}$, and $\mathbf{c}$, prints the output of the actual solution using cvx, and then prints my solution using my algorithm.
+
+\end{document}
