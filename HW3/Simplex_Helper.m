@@ -4,6 +4,11 @@
 %
 % Only to be used as a helper function for the full simplex algorithm
 function [B_star] = Simplex_Helper(A, b, c, B)
+
+    if isstring(B)
+        B_star = B;
+        return
+    end
     
     % Get m and n
     [m, n] = size(A);
@@ -45,7 +50,8 @@ function [B_star] = Simplex_Helper(A, b, c, B)
 
     % Check for unboundedness
     if(d >= 0)
-        error("Problem is unbounded")
+        B_star = "None - problem unbounded";
+        return
     end
 
     % Choose i using smallest index rule
