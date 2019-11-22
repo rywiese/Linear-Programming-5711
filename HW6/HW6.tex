@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,graphicx}
+
+\title{HW5}
+\author{Ry Wiese\\wiese176@umn.edu}
+\date{November 11, 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\subsection{Part 1}
+
+\begin{figure}[h] % "h" is where to place, h=here, t=top, b=bottom
+  \centering
+  \includegraphics[angle=0,totalheight=50mm]{P1graph.jpg}
+  \caption{Graph of problem 1.1}
+  \label{fig:tabl}
+\end{figure}
+
+$f(x) = x^4 - 6x^3 + 3x^2 + 10x$\\
+$f'(x) = 4x^3 - 18x^2 + 6x + 10 = 0$\\
+This has roots $x \approx -.57$, $x \approx 1.1$, and $x \approx 4$. Based on the graph, it is clear that $x \approx -.57$ and $x \approx -4$ are local minimizers, with $x 
+\approx -4$ being the global minimizer.
+
+\subsection{Part 2}
+
+\begin{figure}[h] % "h" is where to place, h=here, t=top, b=bottom
+  \centering
+  \includegraphics[angle=0,totalheight=50mm]{P12.jpg}
+  \caption{Graph of problem 1.2}
+  \label{fig:tabl}
+\end{figure}
+
+The feasible set of figure 2 is the green shaded region (including all of its boundaries). The local minimizers are the point $(-2, 0)$ as well as the segment of line $x_1 = 1$ that is in the feasible region (The left edge of the green shaded region on the right). The global minimizer is the point $(-2, 0)$. 
+
+\section{Problem 2}
+
+\subsection{Part 1}
+
+$\nabla f(x,y,z) = 
+\left( \begin{array}{c}
+     4x + y - 6\\
+     x + 2y + z - 7\\
+     y + 2z - 8\\
+\end{array} \right) = 
+\left( \begin{array}{c}
+     0\\
+     0\\
+     0\\
+\end{array} \right)$
+\\\\
+The candidate has coordinates $x = 1.2$, $y = 1.2$, and $z = 3.4$.
+
+\subsection{Part 2}
+
+$\nabla^2 f(x,y,z) = 
+\left( \begin{array}{ccc}
+    4 & 1 & 0\\
+    1 & 2 & 1\\
+    0 & 1 & 2\\
+\end{array} \right)$
+
+which has eigenvalues .83, 2.79, and 4.48, which are all positive. Thus $\nabla^2 f(x,y,z)$ is positive definite. So the candidate is a local minimum. 
+
+\subsection{Part 3}
+
+
+
+\subsection{Part 4}
+
+I obtained an optimal value of -30.4 with the same (roughly) values for $x, y,$ and $z$. My MATLAB code is included as P2.m.
+
+\section{Problem 3}
+
+I'm really sorry, I've been dealing with some personal issues lately and I will do better on the next assignment.
+
+\subsection{Main Conditions}
+
+\subsection{Primal Feasibility}
+
+\subsection{Dual Feasibility}
+
+\subsection{Complementarity Conditions}
+
+\end{document}
