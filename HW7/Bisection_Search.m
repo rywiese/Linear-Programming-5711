@@ -9,7 +9,7 @@ function [solution] = Bisection_Search(g, l, r, epsilon)
     elseif (g(l) > 0) && (g(r) < 0)
         solution = Bisection_Search_Neg(g, l, r, epsilon);
     else
-        error("IVT not applicable. l and r must have opposite signs.");
+        error("IVT not applicable. g(l) and g(r) must have opposite signs.");
     end
 
 end
