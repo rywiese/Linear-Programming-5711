@@ -9,3 +9,9 @@ cvx_begin
         exp(2*a - b/2) + exp(b/2 - c) <= 1
         a - b == 2 * c
 cvx_end
+
+"a, b, c ="
+[a, b, c]
+
+"x, y, z ="
+[exp(a), exp(b), exp(c)]
