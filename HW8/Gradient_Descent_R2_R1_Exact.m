@@ -12,7 +12,7 @@ function [minimizer] = Gradient_Descent_R2_R1_Exact(f, x, df_dx1, df_dx2, epsilo
     function [y] = Taylor(alph)
         y = f(x + alph * d);
     end
-    a = Golden_Section_Search(@Taylor, 0, 1, .001); % Using a larger value of epsilon here gave me a memory error
+    a = Golden_Section_Search(@Taylor, 0, 1, .001); % Using a smaller value of epsilon here gave me a memory error
 
     minimizer = Gradient_Descent_R2_R1_Exact(f, x + a * d, df_dx1, df_dx2, epsilon);
 
