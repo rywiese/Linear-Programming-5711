@@ -18,5 +18,5 @@ function [y] = df_dx1(x)
 end
 
 function [y] = df_dx2(x)
-    y = - exp(1 - x(1) - x(2)) + exp(x(1) + x(2) - 1) + x(1) + 2 * x(2);
+    y = - exp(1 - x(1) - x(2)) + exp(x(1) + x(2) - 1) + x(1) + 2 * x(2) - 3;
 end
