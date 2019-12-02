@@ -1,5 +1,4 @@
 function [minimizer] = Golden_Section_Search(f, xl, xr, epsilon)
-
     if (xr - xl) < epsilon
         minimizer = (xl + xr) / 2;
         return;
