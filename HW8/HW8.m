@@ -1,8 +1,18 @@
 clc; clear;
 
+% Problem 1i
 [minimizer, xs] = Gradient_Descent_R2_R1_Exact(@f, [0; 0], @df_dx1, @df_dx2, .00001, [[0; 0]]);
 
 "Problem 1 using exact line search"
+minimizer
+f(minimizer)
+[~, n] = size(xs);
+plot(xs(1,:), xs(2,:))
+
+% Problem 1ii
+[minimizer, xs] = Gradient_Descent_R2_R1_Backtrack(@f, [0; 0], @df_dx1, @df_dx2, .00001, [[0; 0]]);
+
+"Problem 1 using backtracking line search"
 minimizer
 f(minimizer)
 [~, n] = size(xs);
