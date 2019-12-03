@@ -33,7 +33,7 @@ f(minimizer)
 A = [1, 2, 3];
 [minimizer, xs] = Gradient_Projection(@g, A, [4; 0; 0], @dg_dx1, @dg_dx2, @dg_dx3, .00001, [[4; 0; 0]]);
 minimizer
-f(minimizer)
+g(minimizer)
 [~, n] = size(xs);
 %plot(xs(1,:), xs(2,:))
 
@@ -46,7 +46,7 @@ cvx_begin
         A * x == 4
 cvx_end
 x
-exp(x(1) + x(2) + x(3)) + x(1)^2 + 2 * x(2)^2 + 3 * x(3)^2 - 2 * x(1) - 7 * x(2) - 5 * x(3)
+g(x)
 
 % f
 function [y] = f(x)
