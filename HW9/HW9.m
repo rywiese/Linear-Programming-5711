@@ -129,16 +129,131 @@ x
 
 % Problem 3
 clear;
-cvx_begin
-cvx_solver mosek;
-integer variables x(2)
-    maximize dot(x, v)
-    subject to
-		dot(x, S(:, 1)) <= B(1);
-		dot(x, S(:, 2)) <= B(2);
-		dot(x, S(:, 3)) <= B(3);
 
+% Actual answer
+%cvx_begin
+%cvx_solver mosek;
+%integer variables x(2)
+%    maximize 100 * x(1) + 150 * x(2)
+%    subject to
+%		8000 * x(1) + 4000 * x(2) <= 40000;
+%		15 * x(1) + 30 * x(2) <= 200;
+%		x >= 0;
+%cvx_end
+%x
+
+% Start of branch and bound
+
+% Root
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
 		x >= 0;
-		x <= 1;
+cvx_end
+x
+
+% Root.left
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) >= 3
+cvx_end
+x
+
+% Root.right
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 2
+cvx_end
+x
+
+% Root.right.left
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 2
+		x(2) >= 6
+cvx_end
+x
+
+% Root.right.right
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 2
+		x(2) <= 5
+cvx_end
+x
+
+% Root.right.left.left
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 2
+		x(2) >= 6
+		x(1) >= 2
+cvx_end
+x
+
+% Root.right.left.right
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 1
+		x(2) >= 6
+cvx_end
+x
+
+% Root.right.left.right.left
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 1
+		x(2) >= 7
+cvx_end
+x
+
+% Root.right.left.right.right
+cvx_begin
+variables x(2)
+    maximize 100 * x(1) + 150 * x(2)
+    subject to
+		8000 * x(1) + 4000 * x(2) <= 40000;
+		15 * x(1) + 30 * x(2) <= 200;
+		x >= 0;
+		x(1) <= 1
+		x(2) <= 6
 cvx_end
 x
