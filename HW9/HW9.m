@@ -1,6 +1,7 @@
-clear; clc;
+clc;
 
 % Problem 1
+clear;
 v = 10;
 a = [4; 4; 5; 7];
 
@@ -115,6 +116,22 @@ x
 
 cvx_begin
 variables x(5)
+    maximize dot(x, v)
+    subject to
+		dot(x, S(:, 1)) <= B(1);
+		dot(x, S(:, 2)) <= B(2);
+		dot(x, S(:, 3)) <= B(3);
+
+		x >= 0;
+		x <= 1;
+cvx_end
+x
+
+% Problem 3
+clear;
+cvx_begin
+cvx_solver mosek;
+integer variables x(2)
     maximize dot(x, v)
     subject to
 		dot(x, S(:, 1)) <= B(1);
