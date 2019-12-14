@@ -43,7 +43,6 @@ integer variables x(4,4) y(4)
 		y >= 0;
 
 cvx_end
-
 x
 y
 
@@ -85,7 +84,6 @@ subject to
 	y >= 0;
 
 cvx_end
-
 x
 y
 
@@ -113,7 +111,6 @@ integer variables x(5)
 		x >= 0;
 		x <= 1;
 cvx_end
-
 x
 
 cvx_begin
@@ -127,5 +124,4 @@ variables x(5)
 		x >= 0;
 		x <= 1;
 cvx_end
-
 x
